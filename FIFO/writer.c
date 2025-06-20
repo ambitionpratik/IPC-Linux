@@ -2,9 +2,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <errno.h>
 
 int main() {
-    if (mkfifo("myfifo", 0666) == -1) {
+    if (mkfifo("/tmp/myfifo", 0666) == -1) {
         if (errno == EEXIST) {
             printf("FIFO already exists.\n");
         } else {
@@ -12,8 +13,11 @@ int main() {
         }
     }
 
-    int fd = open("myfifo", O_WRONLY);
-    write(fd, "Hello FIFO", 10);
+    int fd = open("/tmp/myfifo", O_WRONLY);
+    while(1) {
+        write(fd, "Hello FIFO", 11);
+        sleep(1);
+    }
     close(fd);
 
     return 0;
