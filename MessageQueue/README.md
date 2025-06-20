@@ -24,6 +24,9 @@ A message queue is a kernel-managed linked list of messages stored in memory. Pr
 | `msgctl()` | Control operations (e.g., delete) |
 
 struct msg_buffer {
-    long mtype; // Message Type, can be used by process to fetch it's data.
-    char mtext[MAX_TEXT]; // Actual message
+
+long mtype; // Message Type, can be used by process to fetch it's data.
+    
+char mtext[MAX_TEXT]; // Actual message
+    
 };
