@@ -15,8 +15,14 @@ int main() {
     int msgid = msgget(key, 0666 | IPC_CREAT); // Create message queue
 
     struct msg_buffer message;
-    message.mtype = 1;
-    strcpy(message.mtext, "Hello from sender!");
+    message.mtype = 2;
+    strcpy(message.mtext, "Hello from sender! 2");
+
+    msgsnd(msgid, &message, sizeof(message.mtext), 0);
+    printf("Data sent: %s\n", message.mtext);
+
+    message.mtype = 3;
+    strcpy(message.mtext, "Hello from sender! 3");
 
     msgsnd(msgid, &message, sizeof(message.mtext), 0);
     printf("Data sent: %s\n", message.mtext);

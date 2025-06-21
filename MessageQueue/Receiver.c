@@ -17,9 +17,12 @@ int main() {
 
     // Message type set by sender, to receive that specific data sent by sender.
     // If Message type is 0, receive the message in FIFO order.
-    message.mtype = 1; 
 
-    msgrcv(msgid, &message, sizeof(message.mtext), 1, 0);
+    //msgrcv(msgid, &message, sizeof(message.mtext), 0, 0); // Receives all the messages from sender
+    msgrcv(msgid, &message, sizeof(message.mtext), 2, 0); // Receives the message with mtype=2
+    printf("Data received: %s\n", message.mtext);
+
+    msgrcv(msgid, &message, sizeof(message.mtext), 3, 0); // Receives the message with mtype=3
     printf("Data received: %s\n", message.mtext);
 
     // Destroy the message queue
